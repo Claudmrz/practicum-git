@@ -1,4 +1,4 @@
-#Docker generado para desarrollos en php8.1
+#Docker generado para desarrollos en php8.2
 #
 
 Está preparado para que funcione con localhost, la raíz del documento web está en app/

@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  webserver:
+    build:
+      context: ./.docker/bin/php
+    container_name: 'p82-webserver'
+    restart: 'no'
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - database
+    volumes:
+      - ./app:/var/www/html
+      - ./.docker/config/php/php.ini:/usr/local/etc/php/php.ini
+      - ./.docker/config/vhosts:/etc/apache2/sites-enabled
+      - ./.docker/logs/apache2:/var/log/apache2
+    environment:
+      PMA_PORT: 8080
+      MYSQL_ROOT_PASSWORD: tiger
+  database:
+    build:
+      context: "./.docker/bin/mysql"
+    container_name: 'p82-database'
+    restart: 'no'
+    command: mysqld --sql_mode=""
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ./.docker/data/mysql:/var/lib/mysql
+      - ./.docker/logs/mysql:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: tiger
+      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: 'p82-phpmyadmin'
+    links:
+      - database
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: tiger
+      MYSQL_ROOT_PASSWORD: tiger
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+    ports:
+      - '8080:80'
+    volumes:
+      - ./.docker/config/php/php.ini:/usr/local/etc/php/conf.d/php-phpmyadmin.ini

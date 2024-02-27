@@ -1,0 +1,5 @@
+/.docker/logs/*
+/.docker/data/*
+/app/**
+.DS_Store
+.idea

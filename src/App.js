@@ -4,8 +4,9 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Login from './components/login.component'
 import SignUp from './components/signup.component'
-import Dashboard from './components/dashboard.component'
-import Logout from './components/logout.component'
+import Home from './components/home.component'
+import Ofert from './components/ofert.component'
+import Profile from './components/profile.component'
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
               <Route exact path="/" element={<Login />} />
               <Route path="/sign-in" element={<Login />} />
               <Route path="/sign-up" element={<SignUp />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/logout" element={<Logout />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/ofert" element={<Ofert />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </div>
     </Router>

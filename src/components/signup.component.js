@@ -8,30 +8,18 @@ export default class SignUp extends Component {
 
     constructor(props) {
         super(props)
-        this.onChangeFirstName = this.onChangeFirstName.bind(this);
-        this.onChangeLastName = this.onChangeLastName.bind(this);
-        this.onChangePhone = this.onChangePhone.bind(this);
+        this.onChangeName = this.onChangeFirstName.bind(this);
         this.onChangeUserEmail = this.onChangeUserEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
-        this.onChangePasswordConfirmation = this.onChangePasswordConfirmation.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
-            first_name: '',
-            last_name: '',
-            phone: '',
+            name: '',
             email: '',
             password: '',
-            password_confirmation: '',
         }
     }
     onChangeFirstName(e) {
-        this.setState({ first_name: e.target.value })
-    }
-    onChangeLastName(e) {
-        this.setState({ last_name: e.target.value })
-    }
-    onChangePhone(e) {
-        this.setState({ phone: e.target.value })
+        this.setState({ name: e.target.value })
     }
     onChangeUserEmail(e) {
         this.setState({ email: e.target.value })
@@ -39,49 +27,34 @@ export default class SignUp extends Component {
     onChangePassword(e) {
         this.setState({ password: e.target.value })
     }
-    onChangePasswordConfirmation(e) {
-        this.setState({ password_confirmation: e.target.value })
-    }
     onSubmit(e) {
         e.preventDefault()
 
-    if(this.state.first_name.length<2 || this.state.first_name.length>20 ){
-      alert("First-name should be between 2-20 charaters")
-    }
-    if(this.state.last_name.length<2 || this.state.last_name.length>20 ){
-      alert("Last-name should be between 2-20 charaters")
-    }
-    if(this.state.phone.length<5 || this.state.phone.length>12 ){
-      alert("Phone number should be between 5-12 digits")
+    if(this.state.name.length<2 || this.state.first_name.length>20 ){
+      alert("El nombre debe tener entre 2 y 20 caracteres.")
     }
     if(this.state.password.length<6 ){
-      alert("Password should be greater then 5 charaters")
-    }
-    if(this.state.password !== this.state.password_confirmation ){
-      alert("Enter same password in both fields")
+      alert("La contraseña debe tener más de 5 caracteres.")
     }
 
         const userObject = {
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
-            phone: this.state.phone,
+            first_name: this.state.name,
             email: this.state.email,
             password: this.state.password,
-            password_confirmation: this.state.password_confirmation,
         };
-        axios.post('http://127.0.0.1:8000/api/auth/register', userObject)
+        axios.post('http://localhost/api/register', userObject)
             .then((res) => {
                console.log(res,"aaaaaaaaaaa");
-                if(res.data.message === "User successfully registered"){
-                    alert("Registration Successful")
+                if(res.data.message === "Usuario registrado correctamente."){
+                    alert("Registro correcto.")
                     window.location = "/sign-in";
                 }
             }).catch((error) => {
-                if(error.response.data ===  "{\"email\":[\"The email has already been taken.\"]}"){
-                  alert("The email has already been taken.")
+                if(error.response.data ===  "{\"email\":[\"El email ya ha sido registrado.\"]}"){
+                  alert("El email ya ha sido registrado.")
                 }
             });
-        this.setState({ first_name: '', last_name: '', phone: '', email: '', password: '', password_confirmation: '' })
+        this.setState({ name: '', email: '', password: ''})
     }
 
 
@@ -103,32 +76,10 @@ export default class SignUp extends Component {
             className="form-control"
             placeholder="nombre"
             onChange={this.onChangeFirstName}
-            name="firstname"
-            value={this.state.first_name}
+            name="name"
+            value={this.state.name}
           />
          
-        </div>
-        <div className="mb-3">
-          <label>Apellidos</label>
-          <input 
-           type="text"
-           className="form-control" 
-           placeholder="apellidos" 
-           onChange={this.onChangeLastName}
-           name="lastname"
-           value={this.state.last_name} />
-        </div>
-        <div className="mb-3">
-          <label>Teléfono</label>
-          <input
-            type="number"
-            className="form-control"
-            placeholder="teléfono"
-            onChange={this.onChangePhone}
-            name="phone"
-            value={this.state.phone}
-            
-          />
         </div>
         <div className="mb-3">
           <label>Email</label>
@@ -152,17 +103,6 @@ export default class SignUp extends Component {
             value={this.state.password}
           />
         </div>
-        <div className="mb-3">
-          <label>Confirmar contraseña</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="confirmar contraseña"
-            onChange={this.onChangePasswordConfirmation}
-            name="confirmpassword"
-            value={this.state.password_confirmation}
-          />
-        </div>
         <div className="d-grid">
         <button type="submit" className="btn btn-success text-uppercase">
             Registarme
@@ -172,8 +112,6 @@ export default class SignUp extends Component {
           Ya tienes cuenta? <a href="/sign-in">Iniciar sesión</a>
         </p>
         </div>
-        
-
       </form>
       </div>
       </div>

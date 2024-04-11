@@ -34,6 +34,7 @@ body, html, .App, #root, .auth-wrapper {
 .auth-inner {
   width: 450px;
   margin: auto;
+  
   /*background-image: "./img/fondo1.png";*/
   box-shadow: 0px 14px 80px rgba(160, 17, 94, 0.2);
   padding: 40px 55px 45px 55px;
@@ -64,4 +65,32 @@ body, html, .App, #root, .auth-wrapper {
 }
 .forgot-password a {
   color: #167bff;
+}
+.text-shadow {
+  text-shadow: #cd3333 0px 0px 2px;
+  color: rgb(211, 84, 118);
+  font-size: 80px;;
+}
+.text2-shadow {
+  color: rgb(141, 137, 138);
+  font-size: 20px;;
+}
+.s-bloq-4-text-tittle {
+  text-shadow: #5c5757 0px 0px 2px;
+  color: rgb(95, 88, 89);
+  font-size: 30px;;
+}
+.s-bloq-4-text {
+  font-size: 20px;
+  color: rgb(83, 87, 83);
+}
+.card {
+  flex: 1; /* Distribuye el espacio disponible entre las tarjetas */
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px;
+}
+.link {
+  text-decoration: none; /* Elimina el subrayado */
+  color: rgb(99, 97, 97); /* Cambia el color del texto del enlace a negro */
 }

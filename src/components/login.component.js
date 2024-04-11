@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Outernavbar from './outernavbar.component'
  import axios from 'axios';
 import { Navigate  } from 'react-router-dom';
-//import bg from "./img/fondo1.png"; 
 
 
 export default class Login extends Component {
@@ -37,8 +36,9 @@ export default class Login extends Component {
             email: this.state.email,
             password: this.state.password
         };
-        axios.post('http://localhost:3000/sign-in', userObject)
+        axios.post('http://localhost/api/login', userObject)
             .then((res) => {
+              console.log(res);
                if(res.status=== 200){
                 this.setState({
                   loggedIN : true
